@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+<style type="text/css">
+    .book-table{
+        border-collapse:collapse;
+    }
+
+    .book-table-header{
+        text-align:center;
+        background:#5d9de4;
+        padding:20px;
+        color: white;
+    }
+
+    .book-table-oddRow{
+        text-align:center;
+        background:#eaeaea;
+        border-top:1px solid #BBBBBB;
+    }
+
+    .book-table-evenRow{
+        text-align:center;
+        background:#F9F9F9;
+        border-top:1px solid #BBBBBB;
+    }
+</style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>JSF &amp; JPA</title>
+</h:head>
+
+<h:body>
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{bookController.init}" />
+    </f:metadata>
+
+
+    <h:form id="form">
+        <div style="display: flex; flex-direction: column; align-items: center">
+            <p:commandButton  value="Home" action="index?faces-redirect=true">  </p:commandButton>
+
+        <table id="myTable">
+            <p:outputLabel>Add Book </p:outputLabel>
+
+            <tr>
+                <td>Name:</td>
+                <td><h:inputText id="name" value="#{bookController.name}" /></td>
+            </tr>
+            <tr>
+                <td>Sub name:</td>
+                <td><h:inputText  id="subname" value="#{bookController.subName}" /></td>
+            </tr>
+            <tr>
+                <td>Description:</td>
+                <td><h:inputTextarea value="#{bookController.description}" /></td>
+            </tr>
+            <tr>
+                <td>Author:</td>
+                <td>
+                    <p:selectOneMenu value="#{bookController.authorId}">
+                        <f:selectItems value="#{bookController.authors}" var="author" itemValue="#{author.id}" itemLabel="#{author.fullName}" />
+                    </p:selectOneMenu>
+                    <p:commandLink  value="  Add New Author" action="author?faces-redirect=true">  </p:commandLink>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Publisher:</td>
+                <td>
+                    <p:selectOneMenu value="#{bookController.publisherId}">
+                        <f:selectItems value="#{bookController.publishers}" var="publisher" itemValue="#{publisher.id}" itemLabel="#{publisher.name}" />
+                    </p:selectOneMenu>
+                    <p:commandLink  value="  Add New Publisher" action="publisher?faces-redirect=true">  </p:commandLink>
+
+                </td>
+
+            </tr>
+        </table>
+
+        <p:outputLabel>
+            <h:commandButton value="Add" action="#{bookController.addBook}"/>
+        </p:outputLabel>
+
+        </div>
+
+        <p:dataTable id="dataTable" value="#{bookController.books}" var="myBook"
+                     captionStyle="font-size:20px" styleClass="book-table"
+                     headerClass="book-table-header"
+                     rowClasses="book-table-oddRow,book-table-evenRow">
+
+            <f:facet name="caption">Book List</f:facet>
+
+            <p:column>
+                <f:facet name="header">Name</f:facet>
+                <h:outputText value="#{myBook.name}" rendered="#{!myBook.render}"/>
+                <h:inputText value="#{bookController.name}"  rendered="#{myBook.render}"/>
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">Sub Name</f:facet>
+                <h:outputText value="#{myBook.subName}" rendered="#{!myBook.render}"/>
+                <h:inputText value="#{bookController.subName}"  rendered="#{myBook.render}"/>
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">Description</f:facet>
+                <h:outputText value="#{myBook.description}" rendered="#{!myBook.render}"/>
+                <h:inputText value="#{bookController.description}"  rendered="#{myBook.render}"/>
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">ISBN</f:facet>
+                <h:outputText value="#{myBook.isbn}" />
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">Author</f:facet>
+                <h:outputText value="#{myBook.author.fullName}"/>
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">Publisher</f:facet>
+                <h:outputText value="#{myBook.publisher.name}"/>
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">Edit</f:facet>
+                <h:commandButton value="Edit" action="#{bookController.editBook(myBook.isbn)}" rendered="#{!myBook.render}"/>
+
+                <h:commandButton value="Save" action="#{bookController.saveBook(myBook.isbn)}"  rendered="#{myBook.render}"/>
+            </p:column>
+
+
+            <p:column>
+                <f:facet name="header">Delete</f:facet>
+                <h:commandButton value="Delete" action="#{bookController.deleteBook(myBook.isbn)}" />
+            </p:column>
+
+        </p:dataTable>
+
+
+    </h:form>
+
+</h:body>
+</html>

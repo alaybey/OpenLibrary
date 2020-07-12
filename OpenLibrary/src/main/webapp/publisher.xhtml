@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+    <!--
+    same style and values with book bean
+    -->
+    <style type="text/css">
+        .book-table{
+            border-collapse:collapse;
+        }
+
+        .book-table-header{
+            text-align:center;
+            background:#5d9de4;
+            padding:20px;
+            color: white;
+        }
+
+        .book-table-oddRow{
+            text-align:center;
+            background:#eaeaea;
+            border-top:1px solid #BBBBBB;
+        }
+
+        .book-table-evenRow{
+            text-align:center;
+            background:#F9F9F9;
+            border-top:1px solid #BBBBBB;
+        }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>JSF &amp; JPA</title>
+</h:head>
+
+<h:body>
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{publisherController.init}" />
+    </f:metadata>
+    <h:form id="form">
+        <div style="display: flex; flex-direction: column; align-items: center">
+            <p:commandButton  value="Home" action="index?faces-redirect=true">  </p:commandButton>
+
+        <table id="myTable" style="alignment: center">
+            <p:outputLabel>Add Publisher</p:outputLabel>
+            <tr>
+                <td>Full Name:</td>
+                <td><h:inputText id="fullName" value="#{publisherController.fullName}" /></td>
+            </tr>
+            <tr>
+                <td>About:</td>
+                <td><h:inputTextarea id="about" value="#{publisherController.about}" /></td>
+            </tr>
+        </table>
+        <p:outputLabel>
+            <h:commandButton value="Add" action="#{publisherController.addPublisher}"/>
+        </p:outputLabel>
+        </div>
+        <p:dataTable id="dataTable" value="#{publisherController.publishers}" var="myPublisher"
+                     captionStyle="font-size:20px" styleClass="book-table"
+                     headerClass="book-table-header"
+                     rowClasses="book-table-oddRow,book-table-evenRow">
+
+            <f:facet name="caption">Publisher List</f:facet>
+
+            <p:column>
+                <f:facet name="header">Name</f:facet>
+                <h:outputText value="#{myPublisher.name}" rendered="#{!myPublisher.render}"/>
+                <h:inputText value="#{publisherController.fullName}"  rendered="#{myPublisher.render}"/>
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">About</f:facet>
+                <h:outputText value="#{myPublisher.about}" rendered="#{!myPublisher.render}"/>
+                <h:inputText value="#{publisherController.about}"  rendered="#{myPublisher.render}"/>
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">Books</f:facet>
+                <p:selectOneMenu value="none">
+                    <f:selectItems value="#{publisherController.getBooks(myPublisher.id)}" var="book" itemLabel="#{book.name}" />
+                </p:selectOneMenu>
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">Edit</f:facet>
+                <h:commandButton value="Edit" action="#{publisherController.editPublisher(myPublisher.id)}" rendered="#{!myPublisher.render}"/>
+                <h:commandButton value="Save" action="#{publisherController.savePublisher(myPublisher.id)}"  rendered="#{myPublisher.render}"/>
+            </p:column>
+
+
+            <p:column>
+                <f:facet name="header">Delete</f:facet>
+                <h:commandButton value="Delete" action="#{publisherController.removePublisher(myPublisher.id)}" />
+            </p:column>
+
+        </p:dataTable>
+
+
+    </h:form>
+
+</h:body>
+</html>
