@@ -6,6 +6,8 @@ Requirements:
   JDK8
   Maven
   MySql -> you can change if you want. Configure persistence.xml
+  Application server or web server (like tomcat, tomcat EE, payara, glassfish, websphere) 
+  I didn't use CDI or like things. So tomcat can bu used
   
 Note: 
 `` Completely developed for experiential purpose with Jsf and Jpa ``
