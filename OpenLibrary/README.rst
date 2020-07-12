@@ -13,7 +13,10 @@ Note:
 How to install and deploy/run ? 
 --------------------------------
 
-Before you need to a mysql server. I highly recommend using Docker.
+Before you need to a running mysql server with ``openlibrary`` database/schema and configure in persistence.xml 
+
+I highly recommend using Docker. You also don't need to edit persistence or any
+
 for docker:
 :: 
   docker run -d -p 3306:3306 --name openlibrary -e MYSQL_ROOT_PASSWORD=supersecret mysql:latest
