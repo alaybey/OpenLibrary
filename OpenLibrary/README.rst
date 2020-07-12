@@ -45,3 +45,6 @@ Notes:
   Web pages looking like a SPAM. Sorry for this CSS disaster 
   do not use but need to use -> Firstly EJB and CDI (@inject, @named...), Apache shiro and much more Apache tools/frameworks - spring security, jetty, thymeleaf, webservlet, validation, nice CSS or frontend frameworks
   
+For production
+::
+  Passwords should be kept as hash or encrypted
