@@ -22,12 +22,13 @@ for docker:
   CREATE DATABASE openlibrary;
 
 Well done. Now, get our war file
-``git clone https://github.com/alaybey/OpenLibrary.git``
-``cd ./OpenLibrary``
+::
+  git clone https://github.com/alaybey/OpenLibrary.git``
+  cd ./OpenLibrary
 Make sure maven is installed
-``mvn clean``
-``mvn install``
-``mvn package``
+  mvn clean
+  mvn install
+  mvn package
 
 ... and OpenLibrary.war file will be created in ``./target`` directory
 
