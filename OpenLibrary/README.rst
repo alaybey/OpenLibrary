@@ -26,6 +26,7 @@ Well done. Now, get our war file
   git clone https://github.com/alaybey/OpenLibrary.git``
   cd ./OpenLibrary
 Make sure maven is installed
+::
   mvn clean
   mvn install
   mvn package
