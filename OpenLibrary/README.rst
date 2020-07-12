@@ -23,7 +23,7 @@ for docker:
 
 Well done. Now, get our war file
 ::
-  git clone https://github.com/alaybey/OpenLibrary.git``
+  git clone https://github.com/alaybey/OpenLibrary.git
   cd ./OpenLibrary
 Make sure maven is installed
 ::
