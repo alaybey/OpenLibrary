@@ -20,9 +20,9 @@ I highly recommend using Docker. You also don't need to edit persistence or any
 
 for docker:
 :: 
-  docker run -d -p 3306:3306 --name openlibrary -e MYSQL_ROOT_PASSWORD=supersecret mysql:latest
+  docker run -d -p 3306:3306 --name openlibrary -e MYSQL_ROOT_PASSWORD=secretpass mysql:latest
   docker exec -it openlibrary bash
-  mysql -u root -p supersecret
+  mysql -u root -p secretpass
   CREATE DATABASE openlibrary;
 
 Well done. Now, get our war file
