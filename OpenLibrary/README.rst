@@ -9,7 +9,7 @@ Requirements:
   Application server or web server (like tomcat, tomcat EE, payara, glassfish, websphere) 
   
 Note: 
-I didn't use CDI or like things. So tomcat can bu used
+I didn't use CDI or like things. So tomcat can be used
 
 How to install and deploy/run ? 
 --------------------------------
